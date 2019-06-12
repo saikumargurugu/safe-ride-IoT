@@ -1,0 +1,92 @@
+int inp=14;
+//int sup=44;
+int inp1=15;
+//int sup1=45;
+
+int trigPin=11, echoPin= 12;
+float duration, distance;
+
+
+
+const int IN5 = 2,IN6 = 3,IN7 = 4,IN8 = 7;
+ const int en1=5, en2=6;
+ int SPEED=0;
+
+void setup() {
+  // put your setup code here, to run once:
+Serial.begin(9600);
+
+ pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+
+  pinMode(IN5 , OUTPUT);
+  pinMode(IN6 , OUTPUT);
+  pinMode(IN7 , OUTPUT);
+  pinMode(IN8 , OUTPUT);
+  pinMode(en1 , OUTPUT);
+  pinMode(en2 , OUTPUT);
+
+pinMode(inp, INPUT);
+//pinMode(sup, OUTPUT);
+pinMode(inp1, INPUT);
+//pinMode(sup1, OUTPUT);
+}
+
+void loop() {
+  int i;
+i=digitalRead(inp);
+
+  
+if(i == HIGH){
+  Serial.println(i);
+ // digitalWrite(sup, HIGH);
+  digitalWrite(trigPin, LOW); 
+  delayMicroseconds(2);
+ 
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  
+  duration = pulseIn(echoPin, HIGH);
+  distance = (duration / 2) * 0.0344;
+  Serial.println(distance);
+  if(distance < 10){
+   SPEED=0;}
+   else if(distance>10 && distance<39)
+   SPEED=60;
+  else if (distance>40){
+  SPEED=225;}
+  Serial.println(SPEED);
+  analogWrite(en1,SPEED);
+  analogWrite(en2,SPEED);
+
+  digitalWrite(IN5, HIGH);
+  digitalWrite(IN6, LOW);
+  digitalWrite(IN7, HIGH);
+  digitalWrite(IN8, LOW);
+  }
+
+  i=digitalRead(inp1);
+int m;
+m=  digitalRead(inp1);
+if(m == HIGH){
+  Serial.println(m);
+ // digitalWrite(sup1, HIGH);
+ 
+  SPEED=225;
+  //else{
+  //SPEED= (distance*3)+100;}
+  Serial.println(SPEED);
+  analogWrite(en1,SPEED);
+  analogWrite(en2,SPEED);
+
+  digitalWrite(IN5, LOW);
+  digitalWrite(IN6, HIGH);
+  digitalWrite(IN7, LOW);
+  digitalWrite(IN8, HIGH);
+  }
+  else {
+     SPEED=0;
+    }
+  
+}

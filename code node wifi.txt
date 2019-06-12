@@ -1,0 +1,56 @@
+#define BLYNK_PRINT Serial
+
+
+#include <ESP8266WiFi.h>
+#include <BlynkSimpleEsp8266.h>
+
+
+char auth[] = "34f4b3202b33423b8bbbd15c36e41fd4";
+
+
+char ssid[] = "sai"
+char pass[] = "loveumom";
+
+int start1=D0;
+int start2=D1;
+int start3=D2;
+int start4=D3;
+void setup()
+{
+  // Debug console
+  Serial.begin(9600);
+
+  Blynk.begin(auth, ssid, pass);
+
+  pinMode(start1, INPUT);
+   pinMode(start2, INPUT);
+    pinMode(start3, INPUT);
+   pinMode(start4, INPUT);
+ }
+
+void loop()
+{
+  int j;
+  j=digitalRead(start1);
+  if(j == HIGH){
+    Serial.println(j);
+    }
+
+  int k;
+  k=digitalRead(start3);
+  if(k == HIGH){
+    Serial.println(k);
+    }
+int n;
+n= digitalRead(start2);
+    if(n== HIGH){
+      Serial.println(n);
+      }
+int p;
+p= digitalRead(start4);
+    if(p== HIGH){
+      Serial.println(p);
+      }
+
+Blynk.run();
+}
